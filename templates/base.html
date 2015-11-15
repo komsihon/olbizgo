@@ -1,0 +1,116 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        {% block meta %}{% endblock %}
+		{% block page_title %}{% endblock %}
+        {% if request.META.HTTP_HOST == 'localhost' %}
+            <style>
+                @font-face {
+                    font-family: Open Sans;
+                    src: local(Open Sans), url('{% static 'css/fonts/Open_Sans.woff' %}') format('opentype');
+                }
+            </style>
+        {% else %}
+            <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:400,800,700italic,700,600italic,600,400italic,300italic,300' type='text/css' />
+        {% endif %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+		{% block custom_head %}{% endblock %}
+        <script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+        <script src="{% static 'js/ikwen-util.js' %}"></script>
+    </head>
+    <body>
+        <div id="top-notice-ctnr" class="hidden">
+            <span class="floating-notice has-shade" style="float: none; position: static"> Error goes here </span>
+        </div>
+        <div id="top" class="has-shade">
+            <a href="#" class="logo">
+{#            <a href="{% url 'amazon:home' %}" class="logo">#}
+                <img src="{% static 'img/logo-olbizgo.png' %}" alt="logo" height="45"/>
+            </a>
+            <h1 style="float: right; font: normal 2em Arial; font-style: italic; margin: 20px 24px 0 0"></h1>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <footer>
+            <div class="wrapper text-has-shade" style="height: 240px">
+                <section class="block">
+                    <header>À propos</header>
+                    <p>
+                        Olbizgo est une entreprise du groupe <strong>Olbizgo Group Intl.</strong>
+                    </p>
+                    <p>
+                        Olbizgo propose des produits et services dans les TIC et concoit des gadgets d'entreprise
+                    </p>
+                </section>
+                <nav class="block">
+                    <header>Olbizgo</header>
+                    <ul>
+                        <li><a href="#">{% trans "Boutique Amazon" %}</a></li>
+                        <li><a href="#">{% trans "Gadgets d'entreprises" %}</a></li>
+                        <li><a href="#">{% trans "Solutions cloud" %}</a></li>
+                        <li><a href="#">{% trans "Blog" %}</a></li>
+                    </ul>
+                </nav>
+                <nav class="block">
+                    <header>Newsletter</header>
+                    <p>Restez connecté</p>
+                    <form>
+                        <div>
+                            <input type="email" placeholder="Votre e-mail" style="width: 220px"/>
+                        </div>
+                        <button class="confirm2" style="margin-top: 6px">Je m'inscris !</button>
+                    </form>
+                </nav>
+                <section class="block contact">
+                    <header>Nous contacter</header>
+                    <p>86 Rue des Oliviers, France/Paris</p>
+                    <ul>
+                        <li>
+                            <strong>Phone:</strong>
+                            <a href="tel://+33622233941">(+33) 6 22 23 39 41</a>
+                        </li>
+                        <li>
+                            <strong>E-mail:</strong>
+                            <a href="mailto:info@olbizgo.com">info@olbizgo.com</a>
+                        </li>
+                        <li>
+                            <strong>Site web:</strong>
+                            <a href="http://www.olbizgo.com">www.olbizgo.com</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div id="legal" style="border-top: solid 1px #222; font-size: 11px; margin: 6px auto; padding: 3px 0 33px; text-align: right">
+                <div class="wrapper">
+                    &copy; {{ year }} Olbizgo - Tous droits réservés. - <a href="#">{% trans "Mentions légales" %}</a>
+                </div>
+            </div>
+		</footer>
+        <div id="lightbox" class="hidden">
+            <div class="wrapper">
+                {% block lightbox_dialogs %}{% endblock %}
+            </div>
+        </div>
+        <script>
+            (function() {
+                $('form#lang a').click(function() {
+                    var lang = $(this).attr('val');
+                    $('form#lang input[name=language]').val(lang);
+                    $('form#lang').submit();
+                    return false
+                });
+                $('div#lightbox .dialog .close').click(function() {
+                    $('#lightbox').hide('normal', function() {
+                        $('div#lightbox .dialog').hide()
+                    })
+                });
+            })()
+        </script>
+        {% block custom_js %}
+        {% endblock %}
+    </body>
+</html>

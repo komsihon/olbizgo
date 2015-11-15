@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block page_title %} <title>{% trans "Accueil" %} - Olbizgo</title> {% endblock %}
+{% block custom_head %}
+    <style>
+        body {background: #f6f6f6}
+        #slideshow {background: #000; height: 240px; overflow: hidden; padding: 6px 15px 15px; width: 960px}
+        #slideshow .stage {margin-top: 9px; min-width: 990px}
+        #slideshow h2 {color: #AAA; font: bold 15px Helvetica, sans-serif; text-align: center}
+        #slideshow .arrow {height: 215px; margin-top: -27px; position: absolute; width: 45px}
+        #slideshow .arrow.prev {margin-left: -15px}
+        #slideshow .arrow.prev:hover {background: rgba(255, 255, 255, .3) url({% static 'hotspot/img/arrow-prev.png' %}) no-repeat center}
+        #slideshow .arrow.next {margin-left: 930px}
+        #slideshow .arrow.next:hover {background: rgba(255, 255, 255, .3) url({% static 'hotspot/img/arrow-next.png' %}) no-repeat center}
+        #slideshow h2 {color: #AAA; font: bold 15px Helvetica, sans-serif; text-align: center}
+
+        #categories {float: left; width: 225px}
+        #categories ul li {display: block; float: left; width: 100%}
+        #categories ul li a {box-sizing: border-box; float: left; height: 100%; padding: 3px 6px; width: 100%}
+        #categories ul li a:hover {background: #ddd}
+        #categories .icon + span.title {float: left; margin-top: 4px}
+        #categories .main {font: bold 1.2em Helvetica, Arial, sans-serif; margin-top: 6px}
+        #categories .minor {font: normal 1.1em Helvetica, Arial, sans-serif}
+        #items {float: right; width: 745px}
+
+        #items section {background: #fff; margin-bottom: 18px; padding: 10px}
+        #items section header {border-bottom: 1px solid; color: #775F57; font-size: 1.5em; font-weight: lighter; margin-bottom: 10px}
+        #items section header span {float: none}
+        #items section header a {color: #775F57; cursor: pointer; float: right; font-size: .7em; font-weight: normal; margin-top: 4px; text-decoration: none}
+        #items section header a:hover {color: #300c00}
+        .item {border: 1px solid #ddd; box-sizing: border-box; float: left; height: 225px; margin: 0 8px 9px 0; width: 175px}
+        .item:nth-child(4n) {margin-right: 0}
+    </style>
+{% endblock %}
+{% block content %}
+    <div id="content" class="wrapper" style="padding-top: 18px">
+        <iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=olbizgocom090-21&o=8&p=14&l=ez&f=ifr&f=ifr" width="160" height="600" scrolling="no" marginwidth="0" marginheight="0" border="0" frameborder="0" style="border:none;"></iframe>
+        <iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=olbizgocom090-21&o=8&p=13&l=ez&f=ifr&f=ifr" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" border="0" frameborder="0" style="border:none;"></iframe>
+        <a target="_blank" href="http://www.amazon.fr/b/ref=as_li_ss_tl?_encoding=UTF8&%3Ftag=olbizgocom090-21&camp=1642&creative=19458&linkCode=ur2&node=2155235031&tag=olbizgocom090-21">Donner un nom à votre lien</a><img src="https://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=ur2&o=8" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+        <div class="clear"></div>
+    </div>
+{% endblock %}

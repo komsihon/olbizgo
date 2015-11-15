@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block page_title %}Olbizgo - Thème{% endblock %}
+{% block custom_head %}
+    <style>
+        #content section {clear: both; float: left; margin-top: 24px; width: 100%}
+        header {font: bold 2em Arial, Helvetica, sans-serif; margin-bottom: 9px}
+        button {width: 135px}
+        footer {margin-top: 24px}
+    </style>
+{% endblock %}
+{% block content %}
+    <div id="content" class="wrapper">
+        <section id="buttons">
+            <header>Boutons</header>
+            <div>
+                <button class="default">Normal</button>
+                <button class="confirm">Confirmation</button>
+                <button class="warning">Attention</button>
+                <button class="confirm2">Spécial</button>
+            </div>
+        </section>
+        <section id="forms">
+            <header>Éléments de formulaire</header>
+            <form style="width: 400px" style="border: 1px solid #eee">
+                <div>
+                    <label for="text">Champ texte</label>
+                    <input type="text" id="text" />
+                </div>
+                <div>
+                    <label for="combo">Liste de choix</label>
+                    <div class="fancy-combo-box name" style="margin-top: 0">
+                        <input id="combo" type="text" class="name" readonly value="Choisissez" style="width: 275px"/>
+                        <input type="hidden" value="" name="name" />
+                        <span class="arrow" comment="arrow-bg" style="height: 28px;"><span comment="arrow-img"></span></span>
+                        <div class="entries-overlay hidden" style="padding-top: 32px; width: 160px;margin-left: 0px;">
+                            <ul class="entries has-shade" style="margin-left: -10px">
+                                <li class="entry" data-val="Cacao">Choix 1</li>
+                                <li class="entry" data-val="Ananas">Choix 2</li>
+                                <li class="entry" data-val="Ananas">Choix 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section id="dialogs">
+            <header>Boites de dialogues</header>
+            <div>
+                <button id="show-dialog" class="default">Cliquer</button>
+            </div>
+        </section>
+        <section id="notifications">
+            <header>Notifications</header>
+            <div>
+                <button class="default">Cliquer</button>
+                <button class="warning">Cliquer</button>
+            </div>
+        </section>
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+{% block lightbox_dialogs %}
+    <div class="dialog stream has-shade">
+        <div class="stage">
+            <header style="font-size: 16px">
+                <span>Confirmez-vous ce choix ?</span>
+                <span class='close caution text-has-shade' style="font-size: 18px">X</span>
+            </header>
+            <p style="height: 240px">
+
+            </p>
+            <div class='controls' style="border-top: solid 1px #e7ebfc; clear: both; margin-top: 15px; padding-top: 5px">
+                <button class="default"  style="float: right; margin-right: 15px">
+                    Annuler
+                </button>
+                <button class="confirm" style="float: right; margin-top: 0; margin-right: 15px">
+                    Confirmer
+                </button>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script>
+        (function() {
+            $('div#top h1').text('Theme graphique Olbizgo.com');
+            $('#show-dialog').click(function() {
+                $('#lightbox').fadeIn()
+            });
+            $('section#notifications button.default').click(function() {
+                $('div#top-notice-ctnr span').html('Notification simple').removeClass('failure');
+                $('#top-notice-ctnr').fadeIn().delay(3000).fadeOut();
+            });
+            $('section#notifications button.warning').click(function() {
+                $('div#top-notice-ctnr span').html("Message d'erreur !").addClass('failure');
+                $('#top-notice-ctnr').fadeIn().delay(3000).fadeOut();
+            })
+        })()
+    </script>
+{% endblock %}
