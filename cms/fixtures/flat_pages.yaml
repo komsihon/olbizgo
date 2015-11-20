@@ -1,0 +1,19 @@
+- model: cms.flatpage
+  fields:
+    title_fr: Mentions légales
+    title_en: Legal mentions
+    title_de: Deutch title
+    slug: mentions-legales
+    content_fr: Mentions légales en français
+    content_en: Legal mentions in english
+    content_de: ''
+
+- model: cms.flatpage
+  fields:
+    title_fr: A propos de nous
+    title_en: About us
+    title_de: Deutch title
+    slug: a-propos
+    content_fr: A propos de nous en français
+    content_en: About us in english
+    content_de: ''

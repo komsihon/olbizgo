@@ -1,0 +1,19 @@
+- model: amazon.item
+  fields:
+    title_fr: Call Of Duty Black Ops
+    title_en: Call Of Duty Black Ops
+    title_de: Call Of Duty Black Ops
+    slug: call-of-duty-black-ops
+    category: 55fd77feb37b330f4fc7a6b4
+    embed_code: <a rel="nofollow" href="http://www.amazon.fr/gp/product/B00WMEJX0A/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B00WMEJX0A&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B00WMEJX0A&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B00WMEJX0A" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    appear_in_slideshow: Yes
+
+- model: amazon.item
+  fields:
+    title_fr: Call Of Duty Black Ops 2
+    title_en: Call Of Duty Black Ops 2
+    title_de: Call Of Duty Black Ops 2
+    slug: call-of-duty-black-ops-2
+    category: 55fd77feb37b330f4fc7a6b4
+    embed_code: <a rel="nofollow" href="http://www.amazon.fr/gp/product/B00WMEJX0A/ref=as_li_tl?ie=UTF8&camp=1642&creative=6946&creativeASIN=B00WMEJX0A&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B00WMEJX0A&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B00WMEJX0A" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    appear_in_slideshow: Yes

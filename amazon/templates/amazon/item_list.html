@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block page_title %} <title>{{ category.title }} - Olbizgo</title> {% endblock %}
+{% block custom_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'amazon/css/amazon.css' %}">
+    <style>
+        #top {height: 45px}
+        #top .logo > a {background: url({% static 'img/logo-olbizgo-45.png' %}) no-repeat; height: 45px; margin: 0 0 0 24px}
+        #top ul.social {display: inline; float: right; margin-top: 4px}
+        #items {float: left; width: 850px}
+        #items.medium {float: left; width: 810px}
+        #items.small {float: left; width: 810px}
+        #items {float: left; width: 850px}
+        #items section.small-items .item {margin-right: 18px}
+        #items section.small-items .item:nth-child(6n) {margin-right: 0}
+        #items section.medium-items .item {margin-right: 38px}
+        #items section.medium-items .item:nth-child(4n) {margin-right: 0}
+        #items section.big-items .item {margin: 0 20px 32px 0}
+        #items section.big-items .item:nth-child(3n) {margin-right: 0}
+        #adsense {background: #ddd; float: right; margin-top: 21px; width: 120px; height: 320px}
+        #adsense.frozen {position: fixed; margin: -22px 0 0 870px}
+        #items.medium + #adsense, #items.small + #adsense {border: 1px solid #eee; float: right; width: 160px}
+        #items.medium + #adsense.frozen, #items.small + #adsense.frozen {margin: -22px 0 0 830px}
+
+        {% if not amazon_config.item_border %} .item {border: none} {% endif %}
+    </style>
+{% endblock %}
+{% block content %}
+    <div id="content" class="wrapper">
+        {% include 'amazon/snippets/categories.html' %}
+        <div id="items" class="{{ category.items_size }}">
+            <section class="{{ category.items_size }}-items" style="padding: 0">
+                <header>{{ category.title }}</header>
+                <div>
+                    <span class="item tpl">
+                        <a class="button" rel="nofollow" href=""></a>
+                    </span>
+                </div>
+                <div class="spinner hidden">
+                    <svg class="spinner-container" width="65px" height="65px" viewBox="0 0 52 52">
+                        <circle class="path" cx="26px" cy="26px" r="20px" fill="none" stroke-width="4px"></circle>
+                    </svg>
+                </div>
+                <div class="clear"></div>
+            </section>
+        </div>
+        {% if amazon_config.adsense_item_list %}
+            <div id="adsense">
+                {{ amazon_config.adsense_item_list }}
+            </div>
+        {% else %}
+            <div id="adsense"></div>
+        {% endif %}
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'amazon/js/amazon.js' %}"></script>
+    <script>
+        (function() {
+            ikwen.dataSourceEmpty = false; // Assume there are data
+            ikwen.listItems('{% url 'amazon:item_list' %}', '{{ category.id }}', 0, {{ default_length }});
+            $('#categories').prependTo('#categories-container').show();
+            $('div#top').addClass('toolbar');
+            $(window).scroll(function() {
+                var scrollTop = $(this).scrollTop();  // Default content margin-top + padding+top +  margin-top of the div right under the slideshow
+                if (scrollTop >= 100) {
+                    $('#adsense:not(.frozen)').addClass('frozen')
+                } else {
+                    $('#adsense.frozen').removeClass('frozen')
+                }
+                if ($(document).height() - $(this).height() - scrollTop <= $('footer').height()) {
+                    if (ikwen.dataSourceEmpty) return;
+                    var start = $('div#items section .item:not(.tpl)').length + 1;
+	                ikwen.listItems('{% url 'amazon:item_list' %}', '{{ category.id }}', start, {{ default_length }});
+                }
+            });
+        })()
+    </script>
+{% endblock %}

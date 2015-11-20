@@ -1,0 +1,21 @@
+- model: amazon.category
+  pk: 55fd77feb37b330f4fc7a6b4
+  fields:
+    title_fr: Jeux Videos
+    title_en: Video Games
+    title_de: Video Spiele
+    slug: jeux-videos
+    home_previews_count: 8
+    appear_in_main: Yes
+    visible: Yes
+
+- model: amazon.category
+  pk: 55fd77feb37b330f4fc7a6b5
+  fields:
+    title_fr: Electromenager
+    title_en: Devices
+    title_de: ''
+    slug: electromenager
+    home_previews_count: 8
+    appear_in_main: Yes
+    visible: Yes

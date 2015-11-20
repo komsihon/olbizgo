@@ -1,0 +1,61 @@
+/*
+    Created on : Nov 15, 2015, 20:03:27 PM
+    Author     : Kom Sihon
+*/
+
+#categories {float: left; width: 225px}
+#categories ul li {border-left: 3px solid transparent; display: block; float: left; height: 29px; width: 100%}
+#categories ul li.current {border-left: 3px solid}
+#categories ul li a {box-sizing: border-box; float: left; height: 100%; padding: 2px 0; width: 100%}
+#categories ul li a:hover {background: #eee}
+#categories .icon {margin-left: 6px}
+#categories ul li span.title {box-sizing: border-box; float: left; height: 25px; padding-top: 4px; width: 185px}
+#content #categories .has-faded-edge span.faded-edge {
+    background: -moz-linear-gradient(left,  rgba(246,246,246,0) 0%, rgba(246,246,246,1) 75%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(246,246,246,0)), color-stop(75%,rgba(246,246,246,1)));
+    background: -webkit-linear-gradient(left,  rgba(246,246,246,0) 0%,rgba(246,246,246,1) 75%);
+    background: -o-linear-gradient(left,  rgba(246,246,246,0) 0%,rgba(246,246,246,1) 75%);
+    background: -ms-linear-gradient(left,  rgba(246,246,246,0) 0%,rgba(246,246,246,1) 75%);
+    background: linear-gradient(to right,  rgba(246,246,246,0) 0%,rgba(246,246,246,1) 75%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1);
+    float: right; height: 300%; margin-top: -20px; width: 20%
+}
+#content #categories .has-faded-edge:hover span.faded-edge, #top #categories .has-faded-edge:hover span.faded-edge {
+    background: -moz-linear-gradient(left,  rgba(238,238,238,0) 0%, rgba(238,238,238,1) 75%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238,238,238,0)), color-stop(75%,rgba(238,238,238,1)));
+    background: -webkit-linear-gradient(left,  rgba(238,238,238,0) 0%,rgba(238,238,238,1) 75%);
+    background: -o-linear-gradient(left,  rgba(238,238,238,0) 0%,rgba(238,238,238,1) 75%);
+    background: -ms-linear-gradient(left,  rgba(238,238,238,0) 0%,rgba(238,238,238,1) 75%);
+    background: linear-gradient(to right,  rgba(238,238,238,0) 0%,rgba(238,238,238,1) 75%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1);
+    float: right; height: 300%; margin-top: -20px; width: 20%
+}
+#categories header {color: #333}
+#categories .main {border-bottom: 1px solid #ddd; font: bold 1.2em Helvetica, Arial, sans-serif; margin: 6px 0; padding-bottom: 9px}
+#categories .minor {font: normal 1.1em Helvetica, Arial, sans-serif}
+#categories a {color: #555}
+#categories-container {display: none; left: 0; position: absolute; padding: 0 30px 30px 0; top: 45px; width: 257px}
+#top nav#categories header {display: none}
+#top nav#categories ul li {background: none; display: block}
+#top nav#categories ul li a {border-right: none; padding: 2px 0}
+#top nav#categories {background: #fff; border: 1px solid #eee; margin-left: -257px; overflow: hidden; padding: 0 15px 12px}
+
+#items section {background: #fff; margin-bottom: 18px; padding: 10px}
+#items section header {border-bottom: 1px solid #C0CCE4; font-size: 1.5em; font-weight: lighter; margin-bottom: 10px}
+#items section header span {float: none}
+#items section header a {color: #4F7DDA; cursor: pointer; float: right; font-size: .7em; font-weight: normal; margin-top: 4px; text-decoration: none}
+#items section header a:hover {color: #0841b6}
+#items section .spinner {padding: 15px 0; text-align: center}
+.item {border: 1px solid #ddd; float: left; text-align: center}
+
+#items section.big-items .item {height: 282px; margin: 0 32px 32px 0; padding: 9px; width: 250px}
+#items section.big-items .item > a:not(.button) {float: left; height: 250px; width: 250px}
+#items section.big-items .item a.button {margin: 2px 0 0 24px; width: 170px}
+
+#items section.medium-items .item {height: 192px; margin: 0 9px 24px 0; padding: 6px; width: 160px}
+#items section.medium-items .item > a:not(.button) {float: left; height: 160px; width: 160px}
+#items section.medium-items .item a.button {margin: 2px 0 0 15px; width: 98px}
+
+#items section.small-items .item {height: 141px; margin: 0 31px 24px 0; padding: 4px; width: 110px}
+#items section.small-items .item > a:not(.button) {float: left; height: 110px; width: 110px}
+#items section.small-items .item a.button {margin: 2px 0 0 3px; width: 72px}

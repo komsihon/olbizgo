@@ -36,11 +36,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.webdesign',
+    'import_export',
+    'djangotoolbox',
+    'permission_backend_nonrel',
+    'ikwen',
     'amazon',
+    'cms',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -63,12 +70,6 @@ ROOT_URLCONF = 'Olbizgo.urls'
 
 WSGI_APPLICATION = 'Olbizgo.wsgi.application'
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    # 'ikwen.backends.IkwenAuthBackend',
-)
-
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -83,10 +84,23 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'ikwen.Member'
+
+AUTHENTICATION_BACKENDS = (
+    'permission_backend_nonrel.backends.NonrelPermissionBackend',
+    'ikwen.backends.IkwenAuthBackend',
+)
+
+POMMO_DATABASE = ('localhost', 'root', '', '')
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'fr'
+
+LOCALE_PATHS = (
+    '/home/komsihon/Dropbox/PycharmProjects/Olbizgo/locale',
+)
 
 TIME_ZONE = 'UTC'
 

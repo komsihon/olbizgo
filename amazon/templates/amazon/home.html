@@ -1,99 +1,106 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load webdesign %}
 {% load staticfiles %}
 {% block page_title %} <title>{% trans "Accueil" %} - Olbizgo</title> {% endblock %}
 {% block custom_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'amazon/css/amazon.css' %}">
     <style>
         body {background: #f6f6f6}
-        #slideshow {background: #000; height: 240px; overflow: hidden; padding: 6px 15px 15px; width: 960px}
+        #top #categories header {display: none}
+        #slideshow {height: 272px; overflow: hidden; padding: 6px 15px 15px; width: 960px}
+        #slideshow.dark {background: #000}
         #slideshow .stage {margin-top: 9px; min-width: 990px}
         #slideshow h2 {color: #AAA; font: bold 15px Helvetica, sans-serif; text-align: center}
-        #slideshow .arrow {height: 215px; margin-top: -27px; position: absolute; width: 45px}
+        #slideshow .arrow {height: 300px; margin-top: -10px; position: absolute; width: 45px}
         #slideshow .arrow.prev {margin-left: -15px}
-        #slideshow .arrow.prev:hover {background: rgba(255, 255, 255, .3) url({% static 'hotspot/img/arrow-prev.png' %}) no-repeat center}
+        #slideshow .arrow.prev:hover {background: rgba(0, 0, 0, .2) url({% static 'img/arrow-prev.png' %}) no-repeat center}
         #slideshow .arrow.next {margin-left: 930px}
-        #slideshow .arrow.next:hover {background: rgba(255, 255, 255, .3) url({% static 'hotspot/img/arrow-next.png' %}) no-repeat center}
-        #slideshow h2 {color: #AAA; font: bold 15px Helvetica, sans-serif; text-align: center}
-
-        #categories {float: left; width: 225px}
-        #categories ul li {display: block; float: left; width: 100%}
-        #categories ul li a {box-sizing: border-box; float: left; height: 100%; padding: 3px 6px; width: 100%}
-        #categories ul li a:hover {background: #ddd}
-        #categories .icon + span.title {float: left; margin-top: 4px}
-        #categories .main {font: bold 1.2em Helvetica, Arial, sans-serif; margin-top: 6px}
-        #categories .minor {font: normal 1.1em Helvetica, Arial, sans-serif}
+        #slideshow .arrow.next:hover {background: rgba(0, 0, 0, .2) url({% static 'img/arrow-next.png' %}) no-repeat center}
+        #slideshow.dark .arrow:hover {background: rgba(255, 255, 255, .3)}
+        .slide {border: 1px solid #ddd; float: left; height: 250px; margin-right: 15px; padding: 6px; text-align: center; width: 250px}
+        #slideshow.dark .slide {border: 1px solid #111}
+        .slide a.button {display: none; margin: -36px 0 0 24px; width: 167px}
+        .slide:hover a.button {display: block}
+        #categories + .adsense {background: #ddd; clear: both; float: left; height: 320px; margin-top: 15px; width: 225px}
+        #categories + .adsense.frozen {position: fixed; top: 35px}
         #items {float: right; width: 745px}
+        #items section.small-items .item:nth-child(5n) {margin-right: 0}
+        #items section.medium-items .item:nth-child(4n) {margin-right: 0}
+        #items section.big-items .item {margin-left: 50px}
 
-        #items section {background: #fff; margin-bottom: 18px; padding: 10px}
-        #items section header {border-bottom: 1px solid; color: #775F57; font-size: 1.5em; font-weight: lighter; margin-bottom: 10px}
-        #items section header span {float: none}
-        #items section header a {color: #775F57; cursor: pointer; float: right; font-size: .7em; font-weight: normal; margin-top: 4px; text-decoration: none}
-        #items section header a:hover {color: #300c00}
-        .item {border: 1px solid #ddd; box-sizing: border-box; float: left; height: 225px; margin: 0 8px 9px 0; width: 175px}
-        .item:nth-child(4n) {margin-right: 0}
+        {% if not amazon_config.item_border %} .item {border: none} {% endif %}
     </style>
 {% endblock %}
 {% block content %}
     <div id="content" class="wrapper" style="padding-top: 18px">
-        <div id="slideshow">
-            <div class="arrow prev"></div>
-            <div class="arrow next"></div>
-            <div class="stage" style="width: 1163px">
-                {% for layout in layouts %}
-                    <div class="slide" style="background-image: url({{ layout.preview.url }})"></div>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="wrapper adsense">
-
-        </div>
-        <div style="margin-top: 24px">
-            <nav id="categories">
-                <header style="font-size: 1.2em">{% trans "Catégories" %}</header>
-                <section class="main">
-                    <ul class="clear">
-                        <li>
-                            <a href="#">
-                                <span class="icon"></span>
-                                <span class="title">Category 1</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="clear"></div>
-                </section>
-                <section class="minor">
-                    <ul class="clear">
-                        <li>
-                            <a href="#">
-                                <span class="icon"></span>
-                                <span class="title">Category 1</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="clear"></div>
-                </section>
-            </nav>
-            <div id="items">
-                <section class="subtle-shade">
-                    <header>
-                        <span>Category 1</span>
-                        <a>Tout afficher</a>
-                    </header>
-                    <div>
-                        <span class="item"></span>
-                        <span class="item"></span>
-                        <span class="item"></span>
-                        <span class="item"></span>
+        {% if amazon_config.slideshow_visible and slides|length > 0 %}
+            {% if slides|length >= MIN_SLIDESHOW_ITEMS %}
+                <div id="slideshow" class="dark">
+                    <div class="arrow prev"></div>
+                    <div class="arrow next"></div>
+                    <div class="stage" style="width: 1163px">
+                        {% for item in slides %}
+                            <div class="slide">
+                                <div style="float: left; width: 100%">
+                                    {{ item.embed_code_big_image }}
+                                </div>
+                                <a class="button {{ item.button_style }}" href="{{ item.get_href }}">{{ item.button_text }}</a>
+                            </div>
+                        {% endfor %}
                     </div>
-                    <div class="clear"></div>
-                </section>
-                <section class="subtle-shade">
+                </div>
+            {% endif %}
+        {% else %}
+            <div id="slideshow" class="dark">
+                <div class="arrow prev"></div>
+                <div class="arrow next"></div>
+                <div class="stage" style="width: 1163px">
+                    <div class="slide">
+                        <div style="float: left; width: 100%">
+                            <a rel="nofollow" href="http://www.amazon.fr/gp/product/B00WMEJX0A/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B00WMEJX0A&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B00WMEJX0A&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B00WMEJX0A" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+                        </div>
+                        <a class="button confirm" href="#">Acheter</a>
+                    </div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                </div>
+            </div>
+        {% endif %}
+        {% if amazon_config.adsense_slideshow %}
+            <div class="wrapper adsense" style="height: 90px; margin-top: 15px; width: 728px">
+                {{ amazon_config.adsense_slideshow }}
+            </div>
+        {% else %}
+            <div class="wrapper adsense" style="background: #ddd; height: 90px; margin-top: 15px; width: 728px"></div>
+        {% endif %}
+        <div style="margin-top: 24px">
+            <div style="float: left">
+                {% include 'amazon/snippets/categories.html' %}
+                {% if amazon_config.adsense_categories %}
+                    <div class="adsense">
+                        {{ amazon_config.adsense_categories }}
+                    </div>
+                {% else %}
+                    <div class="adsense"></div>
+                {% endif %}
+            </div>
+            <div id="items">
+                <section class="subtle-shade tpl">
                     <header>
-                        <span>Category 2</span>
+                        <span></span>
                         <a>{% trans "Tout afficher" %}</a>
                     </header>
                     <div>
-
+                        <span class="item tpl">
+                            <a class="button" rel="nofollow" href=""></a>
+                        </span>
+                    </div>
+                    <div class="spinner">
+                        <svg class="spinner-container" width="65px" height="65px" viewBox="0 0 52 52">
+                            <circle class="path" cx="26px" cy="26px" r="20px" fill="none" stroke-width="4px"></circle>
+                        </svg>
                     </div>
                     <div class="clear"></div>
                 </section>
@@ -101,4 +108,134 @@
         </div>
         <div class="clear"></div>
     </div>
+{% endblock %}
+{% block lightbox_dialogs %}
+    <div class="dialog newsletter has-shade">
+        <form class="stage" onsubmit="return false" style="height: 290px; padding: 10px 15px">
+            <img src="{% static 'img/Newsletter_Icon_transp.png' %}" width="135" style="margin-left: 190px"/>
+            <span class="close text-has-shade">X</span>
+            <p style="font: normal 1.5em Helvetica; line-height: 1.6em">
+                {% if config.newsletter_text %}
+                    {{ config.newsletter_text }}
+                {% else %}
+                    {% lorem 15 w %}
+                {% endif %}
+            </p>
+            <div style="margin: 12px 0; text-align: center; width: 100%">
+                <input type="email" placeholder="{% trans "Votre e-mail" %}" />
+                <button class="special">{% trans "Je m'inscris !" %}</button>
+                <span class="icon tick" style="background: none; display: none; position: absolute; margin: 3px 0 0 6px">
+                    <img src="{% static 'img/thumb-tick.jpg' %}" width="24" height="24" />
+                </span>
+                <svg class="spinner-container" width="24px" height="24px" viewBox="0 0 16 16" style="display: none; position: absolute; margin: 3px 0 0 6px">
+                    <circle class="path" cx="8px" cy="8px" r="6px" fill="none" stroke-width="2px"></circle>
+                </svg>
+            </div>
+            <div>
+                <input id="refuse-newsletter" type="checkbox" style="float: left; margin: 5px 6px 0 0"/>
+                <label style="width: 360px">{% trans "Ne plus me faire cette proposition." %}</label>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'amazon/js/amazon.js' %}"></script>
+    <script>
+        (function() {
+            var categories = [];
+            {% for category in categories %}
+                var category = {
+                    id : "{{category.id}}",
+                    title : "{{ category.title }}" ,
+                    slug : "{{ category.slug }}",
+                    items_size : "{{ category.items_size }}",
+                    previews_count: {{ category.home_previews_count }}
+                };
+                categories.push(category);
+            {% endfor %}
+            if (categories.length >= 1) {
+                ikwen.listItemsHome("{% url 'amazon:item_list' %}", categories[0], 0, categories[0].previews_count);
+                categories.splice(0, 1);
+            }
+            if (categories.length >= 1) {
+                ikwen.listItemsHome("{% url 'amazon:item_list' %}", categories[0], 0, categories[0].previews_count);
+                categories.splice(0, 1);
+            }
+            $('#categories').clone().prependTo('#categories-container').show();
+            $('div#slideshow .prev').live('click', function() {
+                $('div#slideshow .stage .slide:last').remove().css('margin-left', '-277px').prependTo('div#slideshow .stage').animate({marginLeft: 0})
+            });
+            $('div#slideshow .next').live('click', function() {
+                $('div#slideshow .stage .slide:first').animate({marginLeft: '-277px'}, 'normal', 'linear', function() {
+                    $(this).remove().css('margin-left', '0').appendTo('div#slideshow .stage')
+                })
+            });
+            $('#slideshow').hover(function() {
+                $(this).addClass('hover')
+            }, function() {
+                $(this).removeClass('hover')
+            });
+            setInterval(function() {
+                $('div#slideshow:not(.hover) .next').click();
+            }, 4000);
+            $('.dialog.newsletter form button').click(function() {
+                $('.dialog.newsletter form .spinner-container').show();
+                var email = $('.dialog.newsletter form input').val();
+                if (!email) return;
+                $.getJSON('{% url 'amazon:add_subscriber' %}', {email: email}, function(response) {
+                    $('.dialog.newsletter form .spinner-container').hide();
+                    if (response.error) {
+                        $('div#top-notice-ctnr span').html(response.error).addClass('failure');
+                        $('#top-notice-ctnr').fadeIn().delay(6000).fadeOut();
+                        return
+                    }
+                    var expiry = new Date();
+                    expiry.setTime(Date.now() + (86400 * 3650 * 1000));  //Expires in ten years ...
+                    ikwen.CookieUtil.set('answered-to-nl-prop', 'yes', expiry);
+                    $('.dialog.newsletter form .icon.tick').show();
+                    setTimeout(function() {
+                        $('#lightbox').fadeOut();
+                    }, 1500);
+                });
+            });
+            $('#refuse-newsletter').click(function() {
+                var expiry = new Date();
+                expiry.setTime(Date.now() + (86400 * 3650 * 1000));  //Expires in ten years ...
+                ikwen.CookieUtil.set('answered-to-nl-prop', 'yes', expiry)
+            });
+            $(window).scroll(function() {
+                var scrollTop = $(this).scrollTop(),
+                    catH = $('nav#categories').height(),
+                    slH = 291, // Slideshow height
+                    spacing = 72 + 18 + 24;  // Default content margin-top + padding+top +  margin-top of the div right under the slideshow
+                if ($(document).height() - $(this).height() - scrollTop <= $('footer').height()) {
+                    if (categories.length == 0) return;
+	                ikwen.listItemsHome('{% url 'amazon:item_list' %}', categories[0], 0, categories[0].previews_count);
+                    categories.splice(0, 1)
+                }
+                if (scrollTop >= 100) {
+                    $('#top:not(.frozen)').addClass('frozen').fadeOut('normal', function() {
+                        $(this).addClass('toolbar').css('margin-top', '-45px').show().animate({marginTop: 0})
+                    })
+                } else {
+                    $('#top.frozen').removeClass('frozen').fadeOut('normal', function() {
+                        $(this).removeClass('toolbar').css('margin-top', '-72px').show().animate({marginTop: 0});
+                        $('div#top #categories').hide();
+                    })
+                }
+                if (scrollTop >= spacing + slH + catH) {
+                    $('nav#categories + .adsense:not(.frozen)').addClass('frozen')
+                } else {
+                    $('nav#categories + .adsense.frozen').removeClass('frozen')
+                }
+            });
+            if (!ikwen.CookieUtil.get('answered-to-nl-prop')) {
+                $('div#lightbox .dialog').hide();
+                $('div#lightbox .dialog.newsletter').show();
+                setTimeout(function() {
+                    $('#lightbox').fadeIn();
+                }, 3000);
+            }
+        })()
+    </script>
 {% endblock %}

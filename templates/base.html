@@ -27,29 +27,59 @@
             <span class="floating-notice has-shade" style="float: none; position: static"> Error goes here </span>
         </div>
         <div id="top" class="has-shade">
-            <a href="#" class="logo">
-{#            <a href="{% url 'amazon:home' %}" class="logo">#}
-                <img src="{% static 'img/logo-olbizgo.png' %}" alt="logo" height="45"/>
-            </a>
-            <h1 style="float: right; font: normal 2em Arial; font-style: italic; margin: 20px 24px 0 0"></h1>
+            <span class="logo">
+                <a href="{% url 'amazon:home' %}"></a>
+                <div id="categories-container">
+                    <div class="clear"></div>
+                </div>
+            </span>
+            <form id="lang" method="post" action="{% url 'set_language' %}"> {% csrf_token %}
+                <input type="hidden" name="language" />
+                <ul>
+                    <li><a href="#" data-val="fr">FR</a></li>
+                    <li><a href="#" data-val="en">EN</a></li>
+                    <li><a href="#" data-val="de">DE</a></li>
+                </ul>
+            </form>
+            <ul class="social">
+                {% if config.facebook_link or config.twitter_link or config.google_plus_link %}
+                    {% if config.facebook_link %}
+                        <li> <a href="{{ config.facebook_link }}"> <img src="{% static 'img/facebook-icon.png' %}" height="36" width="36" /> </a> </li>
+                    {% endif %}
+                    {% if config.twitter_link %}
+                        <li> <a href="{{ config.twitter_link }}"> <img src="{% static 'img/twitter_letter-512.png' %}" height="36" width="36" /> </a> </li>
+                    {% endif %}
+                    {% if config.google_plus_link %}
+                        <li> <a href="{{ config.google_plus_link }}"> <img src="{% static 'img/google-plus-icon-logo.png' %}" height="36" width="36" /> </a> </li>
+                    {% endif %}
+                {% else %}
+                    <li> <a href="#"> <img src="{% static 'img/facebook-icon.png' %}" height="36" width="36" /> </a> </li>
+                    <li> <a href="#"> <img src="{% static 'img/twitter_letter-512.png' %}" height="36" width="36" /> </a> </li>
+                    <li> <a href="#"> <img src="{% static 'img/google-plus-icon-logo.png' %}" height="36" width="36" /> </a> </li>
+                {% endif %}
+            </ul>
         </div>
         {% block content %}
         {% endblock %}
         <footer>
-            <div class="wrapper text-has-shade" style="height: 240px">
+            <div class="wrapper text-has-shade" style="height: 200px">
                 <section class="block">
-                    <header>À propos</header>
-                    <p>
-                        Olbizgo est une entreprise du groupe <strong>Olbizgo Group Intl.</strong>
-                    </p>
-                    <p>
-                        Olbizgo propose des produits et services dans les TIC et concoit des gadgets d'entreprise
-                    </p>
+                    <header>{% trans "À propos" %}</header>
+                    {% if config.about_text %}
+                        {{ config.about_text }}
+                    {% else %}
+                        <p>
+                            Olbizgo est une entreprise du groupe <strong>Olbizgo Group Intl.</strong>
+                        </p>
+                        <p>
+                            Olbizgo propose des produits et services dans les TIC et concoit des gadgets d'entreprise
+                        </p>
+                    {% endif %}
                 </section>
                 <nav class="block">
                     <header>Olbizgo</header>
                     <ul>
-                        <li><a href="#">{% trans "Boutique Amazon" %}</a></li>
+                        <li><a href="{% url 'amazon:home' %}">{% trans "Boutique Amazon" %}</a></li>
                         <li><a href="#">{% trans "Gadgets d'entreprises" %}</a></li>
                         <li><a href="#">{% trans "Solutions cloud" %}</a></li>
                         <li><a href="#">{% trans "Blog" %}</a></li>
@@ -57,25 +87,40 @@
                 </nav>
                 <nav class="block">
                     <header>Newsletter</header>
-                    <p>Restez connecté</p>
-                    <form>
+                    <p>{% trans "Restez connecté" %}</p>
+                    <form onsubmit="return false">
                         <div>
-                            <input type="email" placeholder="Votre e-mail" style="width: 220px"/>
+                            <input type="email" placeholder="{% trans "Votre e-mail" %}" style="width: 220px"/>
                         </div>
-                        <button class="confirm2" style="margin-top: 6px">Je m'inscris !</button>
+                        <button class="special" style="margin-top: 6px">{% trans "Je m'inscris !" %}</button>
+                        <svg class="spinner-container" width="24px" height="24px" viewBox="0 0 16 16" style="display: none; position: absolute; margin: 3px 0 0 6px">
+                            <circle class="path" cx="8px" cy="8px" r="6px" fill="none" stroke-width="2px"></circle>
+                        </svg>
                     </form>
                 </nav>
                 <section class="block contact">
-                    <header>Nous contacter</header>
-                    <p>86 Rue des Oliviers, France/Paris</p>
+                    <header>{% trans "Nous contacter" %}</header>
+                    {% if config.address %}
+                        <p>{{ config.address }}</p>
+                    {% else %}
+                        <p>86 Rue des Oliviers, France/Paris</p>
+                    {% endif %}
                     <ul>
                         <li>
                             <strong>Phone:</strong>
-                            <a href="tel://+33622233941">(+33) 6 22 23 39 41</a>
+                            {% if config.contact_phone %}
+                                <a href="tel://{{ config.get_raw_contact_phone }}">{{ config.contact_phone }}</a>
+                            {% else %}
+                                <a href="tel://+33622233941">(+33) 6 22 23 39 41</a>
+                            {% endif %}
                         </li>
                         <li>
                             <strong>E-mail:</strong>
-                            <a href="mailto:info@olbizgo.com">info@olbizgo.com</a>
+                            {% if config.contact_email %}
+                                <a href="mailto:{{ config.contact_email }}">{{ config.contact_email }}</a>
+                            {% else %}
+                                <a href="mailto:info@olbizgo.com">info@olbizgo.com</a>
+                            {% endif %}
                         </li>
                         <li>
                             <strong>Site web:</strong>
@@ -84,9 +129,14 @@
                     </ul>
                 </section>
             </div>
-            <div id="legal" style="border-top: solid 1px #222; font-size: 11px; margin: 6px auto; padding: 3px 0 33px; text-align: right">
+            <div id="legal" style="border-top: solid 1px #222; font-size: 11px; margin: 6px auto; padding-top: 3px; text-align: right">
                 <div class="wrapper">
-                    &copy; {{ year }} Olbizgo - Tous droits réservés. - <a href="#">{% trans "Mentions légales" %}</a>
+                    &copy; {{ year }} Olbizgo - {% trans "Tous droits réservés." %} -
+                    {% if config.legal_mentions_page %}
+                        <a href="{% url 'flat_page' config.legal_mentions_page.slug %}" style="color: #FF892A">{% trans "Mentions légales" %}</a>
+                    {% else %}
+                        <a href="#" style="color: #FF892A">{% trans "Mentions légales" %}</a>
+                    {% endif %}
                 </div>
             </div>
 		</footer>
@@ -98,7 +148,7 @@
         <script>
             (function() {
                 $('form#lang a').click(function() {
-                    var lang = $(this).attr('val');
+                    var lang = $(this).data('val');
                     $('form#lang input[name=language]').val(lang);
                     $('form#lang').submit();
                     return false
@@ -107,6 +157,36 @@
                     $('#lightbox').hide('normal', function() {
                         $('div#lightbox .dialog').hide()
                     })
+                });
+                $('div#top.toolbar .logo').live('mouseenter', function() {
+                    $('#categories-container').show();
+                    $('#categories').show().animate({marginLeft: 0})
+                }).live('mouseleave', function() {
+                    $('#categories').animate({marginLeft: '-257px'}, 'normal', 'linear', function() {
+                        $('#categories-container').hide()
+                    })
+                });
+                $('footer form button:not(.busy)').click(function() {
+                    $('footer form .spinner-container').show();
+                    var _$button =  $(this),
+                        email = $('footer form input').val();
+                    if (!email) return;
+                    _$button.addClass('busy');
+                    $.getJSON('{% url 'amazon:add_subscriber' %}', {email: email}, function(response) {
+                        $('footer form .spinner-container').hide();
+                         _$button.removeClass('busy');
+                        if (response.error) {
+                            $('div#top-notice-ctnr span').html(response.error).addClass('failure');
+                            $('#top-notice-ctnr').fadeIn().delay(6000).fadeOut();
+                            return
+                        }
+                        $('footer form input').val('');
+                        $('div#top-notice-ctnr span').html("{% trans "Inscription réussie. Merci" %}").removeClass('failure');
+                        $('#top-notice-ctnr').fadeIn().delay(6000).fadeOut();
+                        var expiry = new Date();
+                        expiry.setTime(Date.now() + (86400 * 3650 * 1000));  //Expires in ten years ...
+                        ikwen.CookieUtil.set('answered-to-nl-prop', 'yes', expiry);
+                    });
                 });
             })()
         </script>

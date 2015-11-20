@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from amazon.models import Category, Item, Dimension
+from amazon.models import Category, Item, Subscriber, AmazonConfig
 from django.contrib import admin
+from import_export.admin import ImportExportMixin
 
 
-class DimensionAdmin(admin.ModelAdmin):
-    list_display = ('width', 'height', )
-    ordering = ('width', 'height', )
+class AmazonConfigAdmin(admin.ModelAdmin):
+    list_display = ('slideshow_visible', 'slideshow_background', 'item_border', )
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -24,6 +24,12 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ('category', 'appear_in_slideshow', )
 
 
-# admin.site.register(Dimension, DimensionAdmin)
+class SubscriberAdmin(admin.ModelAdmin, ImportExportMixin):
+    list_display = ('email', 'date_joined', )
+    list_filter = ('date_joined', )
+
+
+admin.site.register(AmazonConfig, AmazonConfigAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Item, ItemAdmin)
+admin.site.register(Subscriber, SubscriberAdmin)

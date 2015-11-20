@@ -1,0 +1,75 @@
+{% load i18n %}
+{% load staticfiles %}
+<nav id="categories">
+    <header style="font-size: 1.2em">{% trans "Catégories" %}</header>
+    {% if categories|length > 0 %}
+        {% if main_categories|length > 0 %}
+            <section class="main">
+                <ul class="clear">
+                {% for category in main_categories %}
+                    <li>
+                        <a href="{% url 'amazon:item_list' category.slug %}">
+                            {% if category.image %}
+                                <img src="{{ category.image.url }}" class="icon" />
+                            {% endif %}
+                            <span class="title has-faded-edge">
+                                <span>{{ category.title }}</span>
+                                <span class="faded-edge"></span>
+                            </span>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+                <div class="clear"></div>
+            </section>
+        {% endif %}
+        {% if minor_categories|length > 0 %}
+            <section class="minor">
+                <ul class="clear">
+                {% for category in minor_categories %}
+                    <li>
+                        <a href="{% url 'amazon:item_list' category.slug %}">
+                            {% if category.image %}
+                                <img src="{{ category.image.url }}" class="icon" />
+                            {% endif %}
+                            <span class="title has-faded-edge">
+                                <span>{{ category.title }}</span>
+                                <span class="faded-edge"></span>
+                            </span>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+                <div class="clear"></div>
+            </section>
+        {% endif %}
+    {% else %}
+        <section class="main">
+            <ul class="clear">
+                <li>
+                    <a href="#">
+                        <img src="{% static 'img/google-plus-icon-logo.png' %}" class="icon" />
+                        <span class="title has-faded-edge">
+                            <span>Exemple de categorie prioritaire</span>
+                            <span class="faded-edge"></span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </section>
+        <section class="minor">
+            <ul class="clear">
+                <li>
+                    <a href="#">
+                        <span class="title has-faded-edge">
+                            <span>Exemple de categorie mineure</span>
+                            <span class="faded-edge"></span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </section>
+    {% endif %}
+</nav>

@@ -1,3 +1,6 @@
+from cms.models import FlatPage, Config
 from django.contrib import admin
 
-# Register your models here.
+
+admin.site.register(Config)
+admin.site.register(FlatPage)

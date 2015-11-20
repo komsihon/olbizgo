@@ -7,7 +7,7 @@ body {background: #FFF; color: #141B5E; font-size: 78%; font-family: Open Sans; 
 h1, h2, h3, h4, h5, h6 {font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0}
 p, ul {margin: 0; padding: 0}
 a {text-decoration: none}
-header {font-family: Helvetica, Arial, sans-serif; color: #22003D}
+header {font-family: Helvetica, Arial, sans-serif; color: #184AB6}
 
 .clear {clear: both}
 .z-max {z-index: 9999}
@@ -16,10 +16,22 @@ header {font-family: Helvetica, Arial, sans-serif; color: #22003D}
 .subtle-shade {box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15); -moz-box-shadow: 0 1px 2px 0 -moz-rgba(0, 0, 0, .15); -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15)}
 .text-has-shade {text-shadow: 1px 2px 2px rgba(0, 0, 0, .15)}
 .inner-shade {box-shadow: inset 0 1px 3px rgba(0, 0, 0, .15); -moz-box-shadow: inset 0 1px 3px -moz-rgba(0, 0, 0, .15); -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .15)}
+.has-faded-edge {overflow: hidden}
+.has-faded-edge span {float: left; width: 400%}
+.has-faded-edge span.faded-edge {
+    background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 75%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(75%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 75%);
+    background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 75%);
+    background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 75%);
+    background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 75%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1);
+    float: right; height: 300%; margin-top: -20px; width: 20%
+}
 .tpl, .hidden {display: none}
 .wrapper {margin: auto; width: 990px}
 .spinner-container {-webkit-animation: rotate 2s linear infinite; animation: rotate 2s linear infinite; z-index: 2}
-.spinner-container .path {stroke-dasharray: 1,150; stroke-dashoffset: 0; stroke: rgba(98, 0, 255, 0.70); stroke-linecap: round;
+.spinner-container .path {stroke-dasharray: 1,150; stroke-dashoffset: 0; stroke: rgba(32, 32, 176, 0.9); stroke-linecap: round;
   -webkit-animation: dash 1.5s ease-in-out infinite; animation: dash 1.5s ease-in-out infinite;
 }
 .icon {float: left; height: 24px; margin-right: 3px; width: 24px}
@@ -45,15 +57,28 @@ header {font-family: Helvetica, Arial, sans-serif; color: #22003D}
 .floating-notice .action {cursor: pointer; text-decoration: underline}
 #top-notice-ctnr {left: 0; position: fixed; text-align: center; top: 66px; width: 100%; z-index: 100}
 
-#top {background: #fff; box-sizing: content-box; height: 72px; min-width: 320px; max-width: 100%; -moz-box-sizing: content-box; width: 100%; position: fixed; top: 0}
+#top {background: #fff; box-sizing: border-box; height: 72px; min-width: 320px; max-width: 100%; -moz-box-sizing: content-box; width: 100%; position: fixed; top: 0; z-index: 9999}
+#top .logo {float: left}
+#top .logo > a {background: url('/olbizgo/static/img/logo-olbizgo.png') no-repeat; float: left; height: 60px; margin: 10px 0 0 24px; width: 240px}
+#top.toolbar {height: 45px}
+#top.toolbar .logo > a {background: url('/olbizgo/static/img/logo-olbizgo-45.png') no-repeat; height: 45px; margin: 0 0 0 24px}
 #top>div {float: left; text-align: center}
-#top .logo {float: left; margin: 10px 0 0 24px}
 #top nav {float: left; padding: 20px 20px 20px 0 }
 #top nav ul {}
 #top nav ul li {background: #fbfbfb; display: inline}
 #top nav ul li a {border-right: solid 1px #e1e4e6; padding: 25px; text-decoration: none}
+#top ul.social {clear: right; display: inline; float: right; margin: 6px 24px 0 0}
+#top.toolbar ul.social {display: inline; float: right; margin-top: 4px}
+#top ul.social li {display: inline; float: left; height: 36px; margin-right: 6px; width: 36px}
+#top ul.social li:last-child {margin-right: 0}
+#top ul.social li a {float: left; height: 36px; width: 36px}
 #top .actions {float: right; margin:20px 15px}
 #top .actions .button {float: left; margin-left: 10px}
+form#lang {float: right; margin: 3px 24px 0 0}
+#top.toolbar form#lang {display: none}
+form#lang li {display: inline; font-size: .8em; margin-right: 6px}
+form#lang li a {color: #666}
+form#lang li:last-child {margin-right: 0}
 
 section.sub-menu {background:#003366; height: 250px; width: 100%}
 section.sub-menu .send {clear: both}
@@ -82,24 +107,20 @@ footer .contact li {border-bottom: none; display: block; float: left; padding: 4
 footer li:first-child {padding-top: 0}
 footer li a {color: #fff}
 footer header {color: #fff; font: bold 1.8em Arial, sans-serif; margin-bottom: 15px}
-footer .lang {float: right}
-footer .lang li {margin-right: 20px}
-footer .lang li:last-child {margin-right: 0}
-form#lang {float: right}
-form#lang li {margin-right: 20px}
-form#lang li:last-child {margin-right: 0}
 
-#lightbox {background: rgba(255, 255, 255, .3); height: 100%; position: fixed; left: 0; top: 0; width: 100%; z-index: 100}
+#lightbox {background: rgba(255, 255, 255, .3); height: 100%; position: fixed; left: 0; top: 0; width: 100%; z-index: 10000}
 #lightbox .wrapper {height: 100%; position: fixed; width: 100%}
 #lightbox .dialog {background: rgba(18, 58, 160, 0.6); border-radius: 2px; margin: 12% auto; padding: 7px; width: 610px}
 #lightbox .dialog .stage {background: #fff; border: 1px solid #EEDDFC; border-radius: 2px; padding: 10px}
 #lightbox .dialog .stage header {float: left; font: normal 18px Helvetica, Arial, sans-serif; width: 100%}
 #lightbox .dialog .stage header .text {font-size: 1.8em}
-#lightbox .dialog .stage header .close {cursor: pointer; color: #D91A1F; float: right; font-size: 18px; padding: 0}
+#lightbox .dialog .stage .close {cursor: pointer; color: #D91A1F; float: right; font: bold 18px Arial; padding: 0}
 #lightbox .dialog .stage form {float: left; margin: 18px 0 6px 18px}
 #lightbox .dialog .stage .button-group {border-top: 1px solid #EEDDFC; float: right; margin-top: 18px; padding: 5px 0 10px; width: 100%}
 #lightbox .dialog .stage .button-group button {float: right; width: 90px}
 #lightbox .dialog .stage .button-group button:first-child {margin-left: 15px}
+
+#lightbox .dialog.newsletter {background: url('/olbizgo/static/img/enveloppe-bg.png'); background-size: 554px 326px; width: 540px}
 
 #login-panel {background:#fff; height:320px; width: 810px}
 #login-panel header {font-weight: bold; text-transform: uppercase}
