@@ -144,9 +144,9 @@ class Item(models.Model, MultiLingualTitle):
 
 class Category(models.Model, MultiLingualTitle):
     SIZE_CHOICES = (
-        (Item.SMALL, "Petite (110 x 110px"),
-        (Item.MEDIUM, "Moyenne (160 x 160px"),
-        (Item.BIG, "Grande (250 x 250px")
+        (Item.SMALL, "Petite (110 x 110px)"),
+        (Item.MEDIUM, "Moyenne (160 x 160px)"),
+        (Item.BIG, "Grande (250 x 250px)")
     )
     title_fr = models.CharField(max_length=100,
                                 help_text=u"Titre en français de la catégorie.")
@@ -154,8 +154,8 @@ class Category(models.Model, MultiLingualTitle):
                                 help_text=u"Titre en anglais de la catégorie.")
     title_de = models.CharField(max_length=100, blank=True,
                                 help_text=u"Titre en allemand de la catégorie.")
-    icon = models.ImageField(blank=True, null=True, width_field=27, height_field=27, upload_to='categories_icons',
-                             help_text=u"Icône d'illustration: 30px X 30px")
+    icon = models.ImageField(blank=True, null=True, upload_to='categories_icons',
+                             help_text=u"Icône d'illustration: 24px X 24px")
     slug = models.SlugField(unique=True,
                             help_text=u"Donnée remplie automatiquement.")
     home_previews_count = models.PositiveSmallIntegerField(default=8,

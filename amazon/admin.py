@@ -4,10 +4,6 @@ from django.contrib import admin
 from import_export.admin import ImportExportMixin
 
 
-class AmazonConfigAdmin(admin.ModelAdmin):
-    list_display = ('slideshow_visible', 'slideshow_background', 'item_border', )
-
-
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title_fr', 'order_of_appearance', 'items_count', 'appear_in_main', 'visible', )
     ordering = ('order_of_appearance', 'title_fr', )
@@ -29,7 +25,7 @@ class SubscriberAdmin(admin.ModelAdmin, ImportExportMixin):
     list_filter = ('date_joined', )
 
 
-admin.site.register(AmazonConfig, AmazonConfigAdmin)
+admin.site.register(AmazonConfig)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Subscriber, SubscriberAdmin)

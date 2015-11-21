@@ -54,7 +54,9 @@
     };
     function applyItemTemplate($tplItem, item) {
         $tplItem.find('a.button').attr('href', item.href).text(item.button_text).addClass(item.button_style);
+        $tplItem.find('span.title span:first').text(item.title);
         $tplItem.prepend($(item.embed_code));
+        $tplItem.find('a:first-child').attr('title', item.title);
         return $tplItem
     }
 })(ikwen);

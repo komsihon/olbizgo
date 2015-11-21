@@ -47,15 +47,16 @@
 #items section header a:hover {color: #0841b6}
 #items section .spinner {padding: 15px 0; text-align: center}
 .item {border: 1px solid #ddd; float: left; text-align: center}
+.item span.title {color: #4F7DDA; float: left; height: 17px; text-align: left; width: 98%}
 
-#items section.big-items .item {height: 282px; margin: 0 32px 32px 0; padding: 9px; width: 250px}
+#items section.big-items .item {height: 306px; margin: 0 32px 32px 0; padding: 9px; width: 250px}
 #items section.big-items .item > a:not(.button) {float: left; height: 250px; width: 250px}
-#items section.big-items .item a.button {margin: 2px 0 0 24px; width: 170px}
+#items section.big-items .item a.button {margin: 10px 0 0 24px; width: 170px}
 
-#items section.medium-items .item {height: 192px; margin: 0 9px 24px 0; padding: 6px; width: 160px}
+#items section.medium-items .item {height: 216px; margin: 0 9px 24px 0; padding: 6px; width: 160px}
 #items section.medium-items .item > a:not(.button) {float: left; height: 160px; width: 160px}
-#items section.medium-items .item a.button {margin: 2px 0 0 15px; width: 98px}
+#items section.medium-items .item a.button {margin: 9px 0 0 15px; width: 98px}
 
-#items section.small-items .item {height: 141px; margin: 0 31px 24px 0; padding: 4px; width: 110px}
+#items section.small-items .item {height: 164px; margin: 0 31px 24px 0; padding: 4px; width: 110px}
 #items section.small-items .item > a:not(.button) {float: left; height: 110px; width: 110px}
-#items section.small-items .item a.button {margin: 2px 0 0 3px; width: 72px}
+#items section.small-items .item a.button {margin: 6px 0 0 3px; width: 72px}

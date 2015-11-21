@@ -36,13 +36,13 @@
     <div id="content" class="wrapper" style="padding-top: 18px">
         {% if amazon_config.slideshow_visible and slides|length > 0 %}
             {% if slides|length >= MIN_SLIDESHOW_ITEMS %}
-                <div id="slideshow" class="dark">
+                <div id="slideshow" class="{{ amazon_config.slideshow_background }}">
                     <div class="arrow prev"></div>
                     <div class="arrow next"></div>
                     <div class="stage" style="width: 1163px">
                         {% for item in slides %}
                             <div class="slide">
-                                <div style="float: left; width: 100%">
+                                <div style="float: left; width: 100%" title="{{ item.title }}">
                                     {{ item.embed_code_big_image }}
                                 </div>
                                 <a class="button {{ item.button_style }}" href="{{ item.get_href }}">{{ item.button_text }}</a>
@@ -52,7 +52,7 @@
                 </div>
             {% endif %}
         {% else %}
-            <div id="slideshow" class="dark">
+            <div id="slideshow" class="none">
                 <div class="arrow prev"></div>
                 <div class="arrow next"></div>
                 <div class="stage" style="width: 1163px">
@@ -69,8 +69,8 @@
             </div>
         {% endif %}
         {% if amazon_config.adsense_slideshow %}
-            <div class="wrapper adsense" style="height: 90px; margin-top: 15px; width: 728px">
-                {{ amazon_config.adsense_slideshow }}
+            <div class="wrapper adsense" style="margin-top: 15px; width: 728px">
+                {{ amazon_config.adsense_slideshow|safe }}
             </div>
         {% else %}
             <div class="wrapper adsense" style="background: #ddd; height: 90px; margin-top: 15px; width: 728px"></div>
@@ -80,7 +80,7 @@
                 {% include 'amazon/snippets/categories.html' %}
                 {% if amazon_config.adsense_categories %}
                     <div class="adsense">
-                        {{ amazon_config.adsense_categories }}
+                        {{ amazon_config.adsense_categories|safe }}
                     </div>
                 {% else %}
                     <div class="adsense"></div>
@@ -94,6 +94,10 @@
                     </header>
                     <div>
                         <span class="item tpl">
+                            <span class="title has-faded-edge">
+                                <span></span>
+                                <span class="faded-edge"></span>
+                            </span>
                             <a class="button" rel="nofollow" href=""></a>
                         </span>
                     </div>
@@ -142,6 +146,10 @@
     <script src="{% static 'amazon/js/amazon.js' %}"></script>
     <script>
         (function() {
+            var width = $('.wrapper.adsense iframe').attr('width');
+            if (width) {
+                $('.wrapper.adsense').width(width);
+            }
             var categories = [];
             {% for category in categories %}
                 var category = {

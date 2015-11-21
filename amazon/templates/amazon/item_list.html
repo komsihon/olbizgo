@@ -47,7 +47,7 @@
         </div>
         {% if amazon_config.adsense_item_list %}
             <div id="adsense">
-                {{ amazon_config.adsense_item_list }}
+                {{ amazon_config.adsense_item_list|safe }}
             </div>
         {% else %}
             <div id="adsense"></div>

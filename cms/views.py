@@ -10,9 +10,9 @@ class BaseView(TemplateView):
         amazon_configs = AmazonConfig.objects.all()
         config = configs[0] if len(configs) > 0 else {}
         amazon_config = amazon_configs[0] if len(amazon_configs) > 0 else {'item_border': True}
-        main_categories = Category.objects.filter(appear_in_main=True)
-        minor_categories = Category.objects.filter(appear_in_main=False)
-        categories = Category.objects.filter(home_previews_count__gt=0)
+        main_categories = Category.objects.filter(appear_in_main=True, visible=True)
+        minor_categories = Category.objects.filter(appear_in_main=False, visible=True)
+        categories = Category.objects.filter(home_previews_count__gt=0, visible=True)
         context = {
             'config': config,
             'amazon_config': amazon_config,
