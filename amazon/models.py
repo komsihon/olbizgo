@@ -74,6 +74,8 @@ class Item(models.Model, MultiLingualTitle):
                                 help_text=u"Intitulé en anglais du produit.")
     title_de = models.CharField(max_length=100, blank=True,
                                 help_text=u"Intitulé en allemand du produit.")
+    price = models.FloatField(blank=True, null=True,
+                              help_text=u"Prix du produit.")
     slug = models.SlugField(help_text=u"Donnée remplie automatiquement.")
     button_text_fr = models.CharField(max_length=30, default="Acheter",
                                       help_text=u"Texte du bouton en français.")

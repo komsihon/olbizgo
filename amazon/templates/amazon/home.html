@@ -8,6 +8,15 @@
     <style>
         body {background: #f6f6f6}
         #top #categories header {display: none}
+        #amazon-store {margin: 72px 0 -72px}
+        #amazon-store a.button {box-shadow: inset 0 1px 0 #FFF5E8;
+            background: #FF7400;
+            background: -moz-linear-gradient(top,  #FFC547 0%, #FF7400 50%, #DA3A00 100%);
+            background: -webkit-linear-gradient(top,  #FFC547 0%, #FF7400 50%,#DA3A00 100%);
+            background: linear-gradient(to bottom,  #FFC547 0%, #FF7400 50%,#DA3A00 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFC547 ', endColorstr='#DA3A00',GradientType=0 );
+            border: 1px solid #EF4508; border-top-color: #FFA500; clear: both; color: #fff; font: bold 1.35em "Open sans";
+            height: 30px; margin: 225px 0 0 78px; width: 216px}
         #slideshow {height: 272px; overflow: hidden; padding: 6px 15px 15px; width: 960px}
         #slideshow.dark {background: #000}
         #slideshow .stage {margin-top: 9px; min-width: 990px}
@@ -33,6 +42,9 @@
     </style>
 {% endblock %}
 {% block content %}
+    <div id="amazon-store" style="background-image: url({% static 'img/boutique_amazon_olbizgo.jpg' %}); height: 300px; width: 100%">
+        <a target="_blank" class="button" href="http://www.amazon.fr/ref=as_li_ss_tl?_encoding=UTF8&camp=1642&creative=19458&linkCode=ur2&tag=olbizgocom090-21">{% trans "Visiter toute la boutique" %}</a><img src="https://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=ur2&o=8" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    </div>
     <div id="content" class="wrapper" style="padding-top: 18px">
         {% if amazon_config.slideshow_visible and slides|length > 0 %}
             {% if slides|length >= MIN_SLIDESHOW_ITEMS %}

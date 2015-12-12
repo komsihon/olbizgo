@@ -24,9 +24,9 @@ class MultiLingualTitle():
 class Config(models.Model):
     facebook_link = models.CharField(max_length=150,
                                      help_text=u"Lien Facebook Olbizgo.")
-    twitter_link = models.CharField(max_length=150,
+    twitter_link = models.CharField(max_length=150, blank=True,
                                     help_text=u"Lien Twitter Olbizgo.")
-    google_plus_link = models.CharField(max_length=150,
+    google_plus_link = models.CharField(max_length=150, blank=True,
                                         help_text=u"Lien Google+ Olbizgo.")
     address = models.CharField(max_length=180,
                                help_text=u"Adresse de Olbizgo (Apparaît en bas de page à droite).")
@@ -39,7 +39,7 @@ class Config(models.Model):
                                      help_text=u"Text en anglais de demande d'inscription à la about (255 caractères max).")
     about_text_de = models.TextField(blank=True,
                                      help_text=u"Text en allemand de demande d'inscription à la about (255 caractères max).")
-    legal_mentions_page = models.ForeignKey('FlatPage',
+    legal_mentions_page = models.ForeignKey('FlatPage', blank=True,
                                             help_text=u"La page contenant les mentions légales du site.")
 
     def __unicode__(self):
