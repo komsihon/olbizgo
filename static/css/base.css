@@ -3,7 +3,7 @@
     Author     : Kom Sihon
 */
 html {height: 100%; padding-bottom: 1px} /* Forces right side scrollbar */
-body {background: #FFF; color: #141B5E; font-size: 78%; font-family: Open Sans; margin: 0;zoom: 100%}
+body {background: #111; color: #141B5E; font-size: 78%; font-family: Open Sans; margin: 0;zoom: 100%}
 h1, h2, h3, h4, h5, h6 {font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0}
 p, ul {margin: 0; padding: 0}
 a {text-decoration: none}
@@ -95,8 +95,8 @@ section.sub-menu .send input {border: solid 1px #DDD; border-radius: 5px; height
     background-image: linear-gradient(top,#6a6e71,#5e6367);
 }
 
-#content {margin-top: 72px}
-footer {background: #111; color: #fff; clear: both; margin-top: 30px; padding: 33px 0 18px; width: 100%}
+#content {padding-top: 90px}
+footer {color: #fff; clear: both; margin-top: 30px; padding: 33px 0 18px; width: 100%}
 footer p {text-align: justify; line-height: 21px}
 footer section {float: left; width: 300px}
 footer .block {float: left; margin-right: 30px; width: 225px}

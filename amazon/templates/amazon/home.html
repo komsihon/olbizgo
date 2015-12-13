@@ -6,121 +6,20 @@
 {% block custom_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'amazon/css/amazon.css' %}">
     <style>
-        body {background: #f6f6f6}
-        #top #categories header {display: none}
-        #amazon-store {margin: 72px 0 -72px}
-        #amazon-store a.button {box-shadow: inset 0 1px 0 #FFF5E8;
-            background: #FF7400;
-            background: -moz-linear-gradient(top,  #FFC547 0%, #FF7400 50%, #DA3A00 100%);
-            background: -webkit-linear-gradient(top,  #FFC547 0%, #FF7400 50%,#DA3A00 100%);
-            background: linear-gradient(to bottom,  #FFC547 0%, #FF7400 50%,#DA3A00 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFC547 ', endColorstr='#DA3A00',GradientType=0 );
-            border: 1px solid #EF4508; border-top-color: #FFA500; clear: both; color: #fff; font: bold 1.35em "Open sans";
-            height: 30px; margin: 225px 0 0 78px; width: 216px}
-        #slideshow {height: 272px; overflow: hidden; padding: 6px 15px 15px; width: 960px}
-        #slideshow.dark {background: #000}
-        #slideshow .stage {margin-top: 9px; min-width: 990px}
-        #slideshow h2 {color: #AAA; font: bold 15px Helvetica, sans-serif; text-align: center}
-        #slideshow .arrow {height: 300px; margin-top: -10px; position: absolute; width: 45px}
-        #slideshow .arrow.prev {margin-left: -15px}
-        #slideshow .arrow.prev:hover {background: rgba(0, 0, 0, .2) url({% static 'img/arrow-prev.png' %}) no-repeat center}
-        #slideshow .arrow.next {margin-left: 930px}
-        #slideshow .arrow.next:hover {background: rgba(0, 0, 0, .2) url({% static 'img/arrow-next.png' %}) no-repeat center}
-        #slideshow.dark .arrow:hover {background: rgba(255, 255, 255, .3)}
-        .slide {border: 1px solid #ddd; float: left; height: 250px; margin-right: 15px; padding: 6px; text-align: center; width: 250px}
-        #slideshow.dark .slide {border: 1px solid #111}
-        .slide a.button {display: none; margin: -36px 0 0 24px; width: 167px}
-        .slide:hover a.button {display: block}
-        #categories + .adsense {background: #ddd; clear: both; float: left; height: 320px; margin-top: 15px; width: 225px}
-        #categories + .adsense.frozen {position: fixed; top: 35px}
-        #items {float: right; width: 745px}
-        #items section.small-items .item:nth-child(5n) {margin-right: 0}
-        #items section.medium-items .item:nth-child(4n) {margin-right: 0}
-        #items section.big-items .item {margin-left: 50px}
-
-        {% if not amazon_config.item_border %} .item {border: none} {% endif %}
+        #content {background: #f6f6f6}
+        .box {float: left; height: 250px; margin: 0 45px 54px 0; width: 300px}
+        .box:nth-child(3n) {margin-right: 0}
     </style>
 {% endblock %}
 {% block content %}
-    <div id="amazon-store" style="background-image: url({% static 'img/boutique_amazon_olbizgo.jpg' %}); height: 300px; width: 100%">
-        <a target="_blank" class="button" href="http://www.amazon.fr/ref=as_li_ss_tl?_encoding=UTF8&camp=1642&creative=19458&linkCode=ur2&tag=olbizgocom090-21">{% trans "Visiter toute la boutique" %}</a><img src="https://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=ur2&o=8" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-    </div>
-    <div id="content" class="wrapper" style="padding-top: 18px">
-        {% if amazon_config.slideshow_visible and slides|length > 0 %}
-            {% if slides|length >= MIN_SLIDESHOW_ITEMS %}
-                <div id="slideshow" class="{{ amazon_config.slideshow_background }}">
-                    <div class="arrow prev"></div>
-                    <div class="arrow next"></div>
-                    <div class="stage" style="width: 1163px">
-                        {% for item in slides %}
-                            <div class="slide">
-                                <div style="float: left; width: 100%" title="{{ item.title }}">
-                                    {{ item.embed_code_big_image }}
-                                </div>
-                                <a class="button {{ item.button_style }}" href="{{ item.get_href }}">{{ item.button_text }}</a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
-        {% else %}
-            <div id="slideshow" class="none">
-                <div class="arrow prev"></div>
-                <div class="arrow next"></div>
-                <div class="stage" style="width: 1163px">
-                    <div class="slide">
-                        <div style="float: left; width: 100%">
-                            <a rel="nofollow" href="http://www.amazon.fr/gp/product/B00WMEJX0A/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B00WMEJX0A&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B00WMEJX0A&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B00WMEJX0A" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-                        </div>
-                        <a class="button confirm" href="#">Acheter</a>
-                    </div>
-                    <div class="slide"></div>
-                    <div class="slide"></div>
-                    <div class="slide"></div>
-                </div>
-            </div>
-        {% endif %}
-        {% if amazon_config.adsense_slideshow %}
-            <div class="wrapper adsense" style="margin-top: 15px; width: 728px">
-                {{ amazon_config.adsense_slideshow|safe }}
-            </div>
-        {% else %}
-            <div class="wrapper adsense" style="background: #ddd; height: 90px; margin-top: 15px; width: 728px"></div>
-        {% endif %}
-        <div style="margin-top: 24px">
-            <div style="float: left">
-                {% include 'amazon/snippets/categories.html' %}
-                {% if amazon_config.adsense_categories %}
-                    <div class="adsense">
-                        {{ amazon_config.adsense_categories|safe }}
-                    </div>
-                {% else %}
-                    <div class="adsense"></div>
-                {% endif %}
-            </div>
-            <div id="items">
-                <section class="subtle-shade tpl">
-                    <header>
-                        <span></span>
-                        <a>{% trans "Tout afficher" %}</a>
-                    </header>
-                    <div>
-                        <span class="item tpl">
-                            <span class="title has-faded-edge">
-                                <span></span>
-                                <span class="faded-edge"></span>
-                            </span>
-                            <a class="button" rel="nofollow" href=""></a>
-                        </span>
-                    </div>
-                    <div class="spinner">
-                        <svg class="spinner-container" width="65px" height="65px" viewBox="0 0 52 52">
-                            <circle class="path" cx="26px" cy="26px" r="20px" fill="none" stroke-width="4px"></circle>
-                        </svg>
-                    </div>
-                    <div class="clear"></div>
-                </section>
-            </div>
+    <div id="content">
+        <div class="wrapper">
+            {% if amazon_config.box_all_shop %}<div class="box subtle-shade">{{ amazon_config.box_all_shop|safe }}</div>{% endif %}
+            {% if amazon_config.box_hot_deals %}<div class="box subtle-shade">{{ amazon_config.box_hot_deals|safe }}</div>{% endif %}
+            {% if amazon_config.box_best_deals %}<div class="box subtle-shade">{{ amazon_config.box_best_deals|safe }}</div>{% endif %}
+            {% if amazon_config.box_buy_smart %}<div class="box subtle-shade">{{ amazon_config.box_buy_smart|safe }}</div>{% endif %}
+            {% if amazon_config.box_sales %}<div class="box subtle-shade">{{ amazon_config.box_sales|safe }}</div>{% endif %}
+            {% if amazon_config.amazon_premium %}<div class="box subtle-shade">{{ amazon_config.amazon_premium|safe }}</div>{% endif %}
         </div>
         <div class="clear"></div>
     </div>

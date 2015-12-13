@@ -15,11 +15,12 @@ class AmazonConfig(models.Model):
         (NONE, "Aucun"),
         (BLACK, "Noir"),
     )
-    item_border = models.BooleanField(default=True, help_text=u"Cocher/Décocher pour mettre/retirer une bordure sur les produits.")
-    slideshow_visible = models.BooleanField(default=True,
+    item_border = models.BooleanField(default=True, editable=False,
+                                      help_text=u"Cocher/Décocher pour mettre/retirer une bordure sur les produits.")
+    slideshow_visible = models.BooleanField(default=True, editable=False,
                                             help_text=u"Cocher/Décocher pour rendre le slideshow visible/invisible."
                                                         u" NB: Il n'apparaîtra que s'il contient au moins 5 éléments.")
-    slideshow_background = models.CharField(max_length=30, default=BLACK, choices=SLIDESHOW_BACKGROUND_CHOICES,
+    slideshow_background = models.CharField(max_length=30, default=BLACK, choices=SLIDESHOW_BACKGROUND_CHOICES, editable=False,
                                             help_text=u"Couleur d'arrière plan du slideshow de la page d'accueil.")
     newsletter_text_fr = models.CharField(max_length=255,
                                           help_text=u"Text en français de demande d'inscription à la newsletter (255 caractères max).")
@@ -27,15 +28,27 @@ class AmazonConfig(models.Model):
                                           help_text=u"Text en anglais de demande d'inscription à la newsletter (255 caractères max).")
     newsletter_text_de = models.CharField(max_length=255, blank=True,
                                           help_text=u"Text en allemand de demande d'inscription à la newsletter (255 caractères max).")
-    adsense_slideshow = models.TextField(blank=True,
+    adsense_slideshow = models.TextField(blank=True, editable=False,
                                          help_text=u"Code du Adsense qui apparaît en dessous du Slideshow"
                                                    u" à la page d'accueil. (728 x 90px)")
-    adsense_categories = models.TextField(blank=True,
+    adsense_categories = models.TextField(blank=True, editable=False,
                                           help_text=u"Code du Adsense qui apparaît en dessous des catégories"
                                                     u" à la page d'accueil. (225 x 320px)")
-    adsense_item_list = models.TextField(blank=True,
+    adsense_item_list = models.TextField(blank=True, editable=False,
                                          help_text=u"Code du Adsense qui apparaît sur la page de listing des produits"
                                                    u"d'une catégorie. (120 x 320px)")
+    box_all_shop = models.TextField(blank=True, null=True, verbose_name=u"Boutique",
+                                    help_text=u"Code Amazon pour toute la boutique. (300 x 250px)")
+    box_hot_deals = models.TextField(blank=True, null=True, verbose_name=u"Produits du moment",
+                                     help_text=u"Code Amazon pour les produits du moment. (300 x 250px)")
+    box_best_deals = models.TextField(blank=True, null=True, verbose_name=u"Meilleures ventes",
+                                      help_text=u"Code Amazon pour les meilleures ventes. (300 x 250px)")
+    box_buy_smart = models.TextField(blank=True, null=True, verbose_name=u"Acheter mâlin",
+                                     help_text=u"Code Amazon pour acheter mâlin. (300 x 250px)")
+    box_sales = models.TextField(blank=True, null=True, verbose_name=u"Prix cassés",
+                                 help_text=u"Code Amazon pour produits à prix cassés. (300 x 250px)")
+    amazon_premium = models.TextField(blank=True, null=True, verbose_name=u"Carré Amazon Premium",
+                                      help_text=u"Code Amazon Premium. (300 x 250px)")
 
     def __unicode__(self):
         return u"Configuration de la boutique"
