@@ -7,19 +7,47 @@
     <link rel="stylesheet" type="text/css" href="{% static 'amazon/css/amazon.css' %}">
     <style>
         #content {background: #f6f6f6}
-        .box {float: left; height: 250px; margin: 0 45px 54px 0; width: 300px}
+        .box {background: #fff; float: left; height: 250px; margin: 0 45px 54px 0; text-align: center; width: 300px}
+        .box a img {height: 224px; margin-top: 13px}
         .box:nth-child(3n) {margin-right: 0}
     </style>
 {% endblock %}
 {% block content %}
     <div id="content">
         <div class="wrapper">
-            {% if amazon_config.box_all_shop %}<div class="box subtle-shade">{{ amazon_config.box_all_shop|safe }}</div>{% endif %}
-            {% if amazon_config.box_hot_deals %}<div class="box subtle-shade">{{ amazon_config.box_hot_deals|safe }}</div>{% endif %}
-            {% if amazon_config.box_best_deals %}<div class="box subtle-shade">{{ amazon_config.box_best_deals|safe }}</div>{% endif %}
-            {% if amazon_config.box_buy_smart %}<div class="box subtle-shade">{{ amazon_config.box_buy_smart|safe }}</div>{% endif %}
-            {% if amazon_config.box_sales %}<div class="box subtle-shade">{{ amazon_config.box_sales|safe }}</div>{% endif %}
-            {% if amazon_config.amazon_premium %}<div class="box subtle-shade">{{ amazon_config.amazon_premium|safe }}</div>{% endif %}
+            <div class="box subtle-shade">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B015XXQ2NM/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B015XXQ2NM&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B015XXQ2NM&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B015XXQ2NM" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            </div>
+            <div class="box subtle-shade">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B016BCBTLY/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B016BCBTLY&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B016BCBTLY&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B016BCBTLY" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            </div>
+            <div class="box subtle-shade">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B010TNVS1W/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B010TNVS1W&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B010TNVS1W&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B010TNVS1W" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            </div>
+            <div class="box subtle-shade">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B005FQJUI2/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B005FQJUI2&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B005FQJUI2&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B005FQJUI2" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            </div>
+            <div class="box subtle-shade">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B00EQB0VHQ/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B00EQB0VHQ&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B00EQB0VHQ&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B00EQB0VHQ" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            </div>
+            <div class="box subtle-shade">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B006WL19O2/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B006WL19O2&linkCode=as2&tag=olbizgocom090-21"><img border="0" src="http://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B006WL19O2&Format=_SL250_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=olbizgocom090-21" ></a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=olbizgocom090-21&l=as2&o=8&a=B006WL19O2" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            </div>
+            <div class="box subtle-shade">
+                <iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=olbizgocom090-21&amp;o=8&amp;p=12&amp;l=ur1&amp;category=gift_certificates&amp;banner=1AYS8GQJDVGRWX654CR2&amp;f=ifr" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+            </div>
+            <div class="box subte-shade">
+                <iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=olbizgocom090-21&o=8&p=12&l=ur1&category=premium&banner=0TPNDXWES3GT80NYEY02&f=ifr" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+            </div>
+            <div class="box subte-shade">
+                <iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=olbizgocom090-21&o=8&p=12&l=ur1&category=jewelry&banner=1YVCHZTWZAYNH819H382&f=ifr" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+            </div>
+{#            {% if amazon_config.box_all_shop %}<div class="box subtle-shade">{{ amazon_config.box_all_shop|safe }}</div>{% endif %}#}
+{#            {% if amazon_config.box_hot_deals %}<div class="box subtle-shade">{{ amazon_config.box_hot_deals|safe }}</div>{% endif %}#}
+{#            {% if amazon_config.box_best_deals %}<div class="box subtle-shade">{{ amazon_config.box_best_deals|safe }}</div>{% endif %}#}
+{#            {% if amazon_config.box_buy_smart %}<div class="box subtle-shade">{{ amazon_config.box_buy_smart|safe }}</div>{% endif %}#}
+{#            {% if amazon_config.box_sales %}<div class="box subtle-shade">{{ amazon_config.box_sales|safe }}</div>{% endif %}#}
+{#            {% if amazon_config.amazon_premium %}<div class="box subtle-shade">{{ amazon_config.amazon_premium|safe }}</div>{% endif %}#}
         </div>
         <div class="clear"></div>
     </div>
@@ -57,6 +85,10 @@
     <script src="{% static 'amazon/js/amazon.js' %}"></script>
     <script>
         (function() {
+{#            $('div#content .box').each(function() {#}
+{#                var h = 250 - $(this).find('a img').height();#}
+{#                $(this).find('a img').css('margin-top', h/2 + 'px')#}
+{#            });#}
             var width = $('.wrapper.adsense iframe').attr('width');
             if (width) {
                 $('.wrapper.adsense').width(width);
